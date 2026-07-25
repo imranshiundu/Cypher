@@ -296,6 +296,8 @@ java CypherTool.java
 
 ### What You'll See
 
+**Encrypting with ROT13:**
+
 ```
 ============================================
          Welcome to the Cypher Tool!
@@ -305,9 +307,9 @@ java CypherTool.java
     1. ROT13      - The classic 13-shift
     2. Atbash     - The alphabet mirror
     3. Caesar     - Julius Caesar's favorite
-    4. Rail Fence - The zigzag transposition
-    5. Vigenere   - The polyalphabetic puzzle
-    6. Base64     - The internet's workhorse
+    4. Morse Code - Dots and dashes
+    5. Base64     - The internet's workhorse
+    6. Pigpen     - Spy shapes
 
   Type 'exit' at any time to quit.
 ============================================
@@ -318,32 +320,82 @@ Select operation:
 > 1
 
 Select cipher:
-  1. ROT13
-  2. Atbash
-  3. Caesar
-  4. Rail Fence
-  5. Vigenere
-  6. Base64
+  1. ROT13      - The classic 13-shift
+  2. Atbash     - The alphabet mirror
+  3. Caesar     - Julius Caesar's favorite
+  4. Morse Code - Dots and dashes
+  5. Base64     - The internet's workhorse
+  6. Pigpen     - Spy shapes
 > 1
 
-Enter the message:
-> Hello, World!
+Enter the message: Hello World
 
 ============================================
 Encrypted message (ROT13):
 ============================================
-Uryyb, Jbeyq!
+Uryyb Jbeyq
+============================================
+```
+
+**Decrypting with ROT13 (same cipher, reversible):**
+
+```
+> 2  (Decrypt)
+
+Select cipher:
+> 1  (ROT13)
+
+Enter the message: Uryyb Jbeyq
+
+============================================
+Decrypted message (ROT13):
+============================================
+Hello World
+============================================
+```
+
+**Encrypting with Morse Code:**
+
+```
+> 1  (Encrypt)
+
+Select cipher:
+> 4  (Morse Code)
+
+Enter the message: SOS
+
+============================================
+Encrypted message (Morse Code):
+============================================
+... --- ...
+============================================
+```
+
+**Decrypting Morse Code back to text:**
+
+```
+> 2  (Decrypt)
+
+Select cipher:
+> 4  (Morse Code)
+
+Enter the message: ... --- ...
+
+============================================
+Decrypted message (Morse Code):
+============================================
+SOS
 ============================================
 ```
 
 ### Tips
 
-- You can type 'exit' at any prompt to quit the program
-- Non-alphabetic characters (spaces, numbers, punctuation)
-  are always preserved unchanged
-- For Caesar cipher, try different shift values and see
-  how the output changes
-- For Vigenere, experiment with different keywords
+- Type `exit` at any prompt to quit the program
+- Non-alphabetic characters (spaces, numbers, punctuation) are preserved unchanged
+- ROT13 and Atbash are their own inverse - encrypting twice returns the original text
+- Caesar cipher: try different shift values (1-25) to see how the output changes
+- Morse Code uses spaces between letters and ` / ` between words
+- Base64 is encoding, not encryption - anyone can decode it
 
 ---
 
