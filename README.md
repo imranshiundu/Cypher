@@ -117,84 +117,51 @@ in English, so look for the most common letter in the ciphertext).
 
 ---
 
-### 4. RAIL FENCE
+### 4. MORSE CODE
 
-**Concept:** Transposition cipher using a zigzag pattern.
+**Concept:** Dots and dashes for each letter.
 
 ```
-Message: "WEAREDISCOVEREDFLEEATONCE"
-Rails: 3
+THE MORSE CODE ALPHABET:
 
-Zigzag pattern:
-W . . . E . . . C . . . R . . . E . . . E . . . A . . . N
-. E . A . E . D . S . O . V . E . E . F . L . E . T . O . C
-. . R . . . I . . . V . . . D . . . L . . . T . . . E . . .
+A .-      B -...    C -.-.    D -..     E .
+F ..-.    G --.     H ....    I ..      J .---
+K -.-     L .-..    M --      N -.      O ---
+P .--.    Q --.-    R .-.     S ...     T -
+U ..-     V ...-    W .--     X -..-    Y -.--
+Z --..
 
-Read row by row:
-Row 0: W E C R E E A N
-Row 1: E A E D S O E F L E T O C
-Row 2: R I V D L T E
-
-Encrypted: WECREEAN AEEDSOE FLET O C RIVDLTE
+Numbers:
+0 -----   1 .----  2 ..---  3 ...--  4 ....-
+5 .....   6 -....  7 --...  8 ---..  9 ----.
 ```
 
-**How it works:** Write the message diagonally on a fence with
-the specified number of rails, then read it horizontally.
+**How to encrypt:** Each letter becomes a unique pattern of dots
+and dashes. Letters are separated by spaces, words by " / ".
 
-**Fun fact:** This is a TRANSPOSITION cipher, not a substitution
-cipher. The letters don't change, only their positions do.
-It's like shuffling a deck of cards while keeping each card
-face up.
+```
+Example:
+  S O S
+  ... --- ...
+```
 
-**Real-world use:** Used in some WWII military communications
-as part of more complex encryption systems.
+**Fun fact:** Morse code was invented in the 1830s for telegraph
+communication. Samuel Morse and Alfred Vail developed it so
+messages could be sent over electrical wires. SOS (... --- ...)
+became the universal distress signal in 1906. It was chosen
+because it is simple to remember and unmistakable, even in
+bad signal conditions.
 
-**Vulnerability:** Easy to crack with pencil and paper. The key
-space is just the number of rails (usually 2-10).
+**Real-world use:** Still used in aviation and maritime today.
+Some amateur radio operators use it daily. The US Navy was
+using Morse code well into the 1990s.
+
+**Vulnerability:** Easy to recognize and decode. The codebook
+is public and there are only 36 characters to learn.
 
 ---
 
-### 5. VIGENERE CIPHER
-
-**Concept:** Polyalphabetic substitution using a keyword.
-
-```
-Message: SECRET
-Keyword: KEYKEY (repeated to match length)
-
-S E C R E T
-K E Y K E Y
---------
-Each letter shifts by the keyword letter's position:
-S(18) + K(10) = C(2)
-E(4) + E(4)  = I(8)
-C(2) + Y(24) = U(0)
-R(17) + K(10) = B(1)
-E(4) + E(4)  = I(8)
-T(19) + Y(24) = N(13)
-
-Result: "CIUBIN"
-```
-
-**How it works:** Each letter of the plaintext is shifted by
-the corresponding letter of the keyword. The keyword repeats
-to cover the entire message.
-
-**Fun fact:** When it was invented in 1553 by Giovan Battista
-Bellaso, it was called "le chiffre indechiffrable" - the
-indecipherable cipher. It resisted systematic decryption for
-nearly 300 years until Charles Babbage broke it in 1854.
-
-**Real-world use:** Used in the Enigma machine (a more complex
-version), and in the WWII SIGABA cipher.
-
-**Vulnerability:** Once the keyword length is known (via
-Kasiski examination), it can be broken into multiple Caesar
-ciphers.
-
----
-
-### 6. BASE64
+### 5. BASE64
 
 **Concept:** Binary-to-text encoding.
 
@@ -214,7 +181,7 @@ Base64 characters (6 bits each). The Base64 alphabet uses
 A-Z, a-z, 0-9, +, and /.
 
 **Fun fact:** Base64 is NOT encryption! It is ENCODING. Anyone
-can decode it. It's like translating English to French - it
+can decode it. It is like translating English to French - it
 changes the representation but anyone who knows French can
 read it. However, it IS used as part of encryption systems
 to safely transmit binary data over text-based protocols.
@@ -224,11 +191,71 @@ to safely transmit binary data over text-based protocols.
 - Embedding images in HTML/CSS
 - Storing data in JSON
 - HTTP Basic Authentication headers
-- Bitcoin addresses
+- Bitcoin addresses use a modified Base58
 
-**Vulnerability:** None to break, because there's nothing to
-break. It's encoding, not encryption. Always use it with
+**Vulnerability:** None to break, because there is nothing to
+break. It is encoding, not encryption. Always use it with
 actual encryption, never alone.
+
+---
+
+### 6. PIGPEN CIPHER
+
+**Concept:** Geometric shapes based on a tic-tac-toe grid.
+
+```
+HOW IT WORKS:
+
+Draw two tic-tac-toe grids. Each letter gets the SHAPE
+that surrounds it in the grid.
+
+GRID 1 (plain letters):     GRID 2 (with dots):
++---+---+---+               +---+---+---+
+| A | B | C |               | J | K | L |
++---+---+---+               +---+---+---+
+| D | E | F |               | M | N | O |
++---+---+---+               +---+---+---+
+| G | H | I |               | P | Q | R |
++---+---+---+               +---+---+---+
+
+The SYMBOL for each letter is its cell border shape:
+
+  A = |'    (open right)
+  B = |_    (open bottom)
+  C = '|    (open left)
+  D = '|.   (open right + top)
+  E = +-+   (open all sides = cross)
+  F = .|'   (open left + bottom)
+  G = '|'   (open top)
+  H = '.'   (open bottom)
+  I = .|.   (center)
+
+Letters J-R use the SAME shapes but with a DOT added.
+This gives 18 unique symbols for 26 letters.
+```
+
+**How it works:** Each letter is replaced by the geometric shape
+of its cell in the grid. The shape is determined by which sides
+of the cell are open (touching the grid lines).
+
+```
+Example:
+  H E L L O
+  '.'  +-+  .|.  .|.  '|'
+```
+
+**Fun fact:** The Freemasons used a version of this cipher.
+It has been found in Freemason buildings dating back to the
+1700s. Kids also love it because it looks like secret alien
+writing. It is one of the most visually distinctive ciphers
+ever created.
+
+**Real-world use:** Primarily educational and recreational.
+The simplicity makes it easy to crack but fun to learn and
+draw by hand.
+
+**Vulnerability:** Only 26 possible letter-to-symbol mappings.
+Once you have the key (the grid), every message is readable.
 
 ---
 
@@ -919,18 +946,18 @@ Data lifecycle:
 ## QUICK REFERENCE
 
 ```
-Cipher          | Type      | Speed | Security | Best For
-----------------|-----------|-------|----------|------------------
-ROT13           | Substitute| Fast  | None     | Fun, education
-Atbash          | Substitute| Fast  | None     | Fun, education
-Caesar          | Substitute| Fast  | None     | Fun, education
-Rail Fence      | Transpose | Fast  | Weak     | Fun, education
-Vigenere        | Polyalpha | Fast  | Moderate | Historical
-Base64          | Encoding  | Fast  | None     | Data transport
-AES             | Symmetric | Very  | Excellent| Everything modern
-RSA             | Asymmetric| Slow  | Good     | Key exchange
-ECC             | Asymmetric| Med   | Excellent| Mobile, modern
-OTP             | Unknown   | Fast  | Perfect  | Diplomacy
+Cipher          | Type       | Speed | Security | Best For
+----------------|------------|-------|----------|------------------
+ROT13           | Substitute | Fast  | None     | Fun, education
+Atbash          | Substitute | Fast  | None     | Fun, education
+Caesar          | Substitute | Fast  | None     | Fun, education
+Morse Code      | Encoding   | Fast  | None     | Comms, education
+Base64          | Encoding   | Fast  | None     | Data transport
+Pigpen          | Visual     | Fast  | Weak     | Fun, spy games
+AES             | Symmetric  | Fast  | Excellent| Everything modern
+RSA             | Asymmetric | Slow  | Good     | Key exchange
+ECC             | Asymmetric | Med   | Excellent| Mobile, modern
+OTP             | Unknown    | Fast  | Perfect  | Diplomacy
 ```
 
 ---
