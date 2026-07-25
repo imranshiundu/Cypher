@@ -296,97 +296,13 @@ java CypherTool.java
 
 ### What You'll See
 
-**Encrypting with ROT13:**
+**Encrypting a message:**
 
-```
-============================================
-         Welcome to the Cypher Tool!
-============================================
+![Terminal showing encryption](terminal%201.png)
 
-  6 ciphers to explore:
-    1. ROT13      - The classic 13-shift
-    2. Atbash     - The alphabet mirror
-    3. Caesar     - Julius Caesar's favorite
-    4. Morse Code - Dots and dashes
-    5. Base64     - The internet's workhorse
-    6. Pigpen     - Spy shapes
+**Decrypting it back:**
 
-  Type 'exit' at any time to quit.
-============================================
-
-Select operation:
-  1. Encrypt
-  2. Decrypt
-> 1
-
-Select cipher:
-  1. ROT13      - The classic 13-shift
-  2. Atbash     - The alphabet mirror
-  3. Caesar     - Julius Caesar's favorite
-  4. Morse Code - Dots and dashes
-  5. Base64     - The internet's workhorse
-  6. Pigpen     - Spy shapes
-> 1
-
-Enter the message: Hello World
-
-============================================
-Encrypted message (ROT13):
-============================================
-Uryyb Jbeyq
-============================================
-```
-
-**Decrypting with ROT13 (same cipher, reversible):**
-
-```
-> 2  (Decrypt)
-
-Select cipher:
-> 1  (ROT13)
-
-Enter the message: Uryyb Jbeyq
-
-============================================
-Decrypted message (ROT13):
-============================================
-Hello World
-============================================
-```
-
-**Encrypting with Morse Code:**
-
-```
-> 1  (Encrypt)
-
-Select cipher:
-> 4  (Morse Code)
-
-Enter the message: SOS
-
-============================================
-Encrypted message (Morse Code):
-============================================
-... --- ...
-============================================
-```
-
-**Decrypting Morse Code back to text:**
-
-```
-> 2  (Decrypt)
-
-Select cipher:
-> 4  (Morse Code)
-
-Enter the message: ... --- ...
-
-============================================
-Decrypted message (Morse Code):
-============================================
-SOS
-============================================
-```
+![Terminal showing decryption](terminal%202.png)
 
 ### Tips
 
